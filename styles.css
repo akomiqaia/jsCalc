@@ -1,0 +1,61 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: "Poppins", helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+body {
+  margin: 0 auto;
+  background-color: tomato;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+  justify-content: center;
+  align-content: center;
+  min-height: 100vh;
+  
+}
+.item {
+  place-self: stretch;
+  cursor: pointer;
+  font-size: 2rem;
+  border: solid 1px white;
+  outline: none;
+  background-color: rgba(255,255,255,0.75);
+}
+
+.item:hover {
+  background-color: rgba(255,255,255,0.9);
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+#equals {
+  grid-row: span 2;
+}
+
+#display {
+  align-self: end;
+  grid-column:1 / -1;
+  background-color: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.whole-formula {
+  color: rgba(255,255,255,0.75);
+}
+
+.current-number{
+  color: white;
+  font-size: 2.5rem;
+}
