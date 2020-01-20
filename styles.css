@@ -6,7 +6,7 @@
 
 body {
   margin: 0 auto;
-  background-color: tomato;
+  background-color: #eee;
 }
 .container {
   display: grid;
@@ -14,34 +14,39 @@ body {
   grid-template-rows: minmax(120px, auto) repeat(5, 100px);
   justify-content: center;
   align-content: center;
-  min-height: 100vh;
-  
+  min-height: 100vh; 
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.25),
+             -20px -20px 20px #FFFFFF;
 }
+
 .item {
   place-self: stretch;
   cursor: pointer;
   font-size: 2rem;
-  border: solid 1px white;
+  border: solid 3px white;
   outline: none;
   background-color: rgba(255,255,255,0.75);
 }
 
 .item:hover {
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,0.1);
 }
 
 .span-two {
   grid-column: span 2;
 }
-
+#ac {
+  color: tomato;
+}
 #equals {
   grid-row: span 2;
+  color: tomato
 }
 
 #display {
   align-self: end;
   grid-column:1 / -1;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(255,255,255,0.75);
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
@@ -52,10 +57,23 @@ body {
 }
 
 .whole-formula {
-  color: rgba(255,255,255,0.75);
+  color: rgba(0,0,0,0.75);
+  position: relative;
+}
+#display:after{
+  content: "";
+  position: relative;
+  display: flex;
+  align-self: end;
+  bottom: -20px;
+  width: 90%;
+  left: 0px;
+  height: 0.5em;
+  border-top: 3px solid tomato;
+  
 }
 
 .current-number{
-  color: white;
+  color: black;
   font-size: 2.5rem;
 }
