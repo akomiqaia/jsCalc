@@ -4,6 +4,7 @@ let numbers = document.querySelectorAll(".number")
 let operators = document.querySelectorAll(".operators")
 let clear = document.getElementById('clear')
 let equals = document.getElementById('equals')
+
 // clear function to delete the typed number
       // double click to start all over again
 clear.addEventListener('click', () => {
@@ -14,7 +15,7 @@ clear.addEventListener('dblclick', () => {
   wholeFormula.innerText = ""
 })
 
-// function displayNumber()
+// handle numbers and decimal element
 numbers.forEach(number => {
   number.addEventListener('click', () => {
 
@@ -24,7 +25,7 @@ numbers.forEach(number => {
       return
     }
 
-    // if equal pressed and user is trying to yype a new number clear everything
+    // if equal pressed and user is trying to type a new number clear everything
     if (wholeFormula.innerText.toString().includes("=")) {
       wholeFormula.innerText = ""
       currentNumber.innerText = ""
@@ -38,26 +39,60 @@ numbers.forEach(number => {
   })
 })
 
-// function displayWholeFormula()
+let endsWithOperator = /[\/\*\+\-]$/
+let endsWithMinus = /[\/\*\+\-]-$/
+
+// handle operators
 operators.forEach(operator => {
   operator.addEventListener('click', () => {
-    
+    // If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign).
+    if(endsWithMinus.test(wholeFormula.innerText)) {
+      wholeFormula.innerText = wholeFormula.innerText.slice(0, -2) + operator.innerText
+      return
+    }
+    if(endsWithOperator.test(wholeFormula.innerText)) {
+      if (operator.innerText == '-') {
+        wholeFormula.innerText += '-'
+      }
+      wholeFormula.innerText = wholeFormula.innerText.slice(0, -1) + operator.innerText
+      return
+    }
 
     if (wholeFormula.innerText.toString().includes("=")) {
-      wholeFormula.innerText = ` ${currentNumber.innerText} ${operator.innerText}`
+      wholeFormula.innerText = `${currentNumber.innerText}${operator.innerText}`
       currentNumber.innerText = ""
       return
     }
-    wholeFormula.innerText += ` ${currentNumber.innerText} ${operator.innerText}`
-    currentNumber.innerText = ""
+    updateDisplay(currentNumber, wholeFormula, operator)
   })
 })
-// funtion equals()
+
+// handle equals
 equals.addEventListener('click', () => {
+  if (wholeFormula.innerText.toString().includes("=")) {
+    // if equal button is clicked twice it repeats the previous operation
+    // for example if user enters 2 * 2 and presses equal the user gets 2 * 2 = 4 
+    // if the user clicks equal button again it has to display 4 * 2 = 8, if again 8 * 2 = 16 and so on
+    let equalIndex = wholeFormula.innerText.indexOf("=")
+    let previousOperation = wholeFormula.innerText.slice(equalIndex-2, equalIndex)
+    let result = wholeFormula.innerText.slice(equalIndex+1)
+    wholeFormula.innerText = result + previousOperation
+    evaluate(currentNumber, wholeFormula, equals)
+    return
+  } 
   wholeFormula.innerText += currentNumber.innerText
-  currentNumber.innerText = eval(wholeFormula.innerText).toFixed(4)
-  wholeFormula.innerText += ` ${equals.innerText} ${currentNumber.innerText}`
+  evaluate(currentNumber, wholeFormula, equals)
 })
 
 
+function updateDisplay(c,w,o) {
+  w.innerText += `${c.innerText}${o.innerText}`
+  c.innerText = ""
+}
+function evaluate(c, w, e) {
+  // calculate the value and if it's long float number just torund it to 4 decimal number
+  c.innerText = +eval(w.innerText).toFixed(4)
+  w.innerText += `${e.innerText}${c.innerText}`
+}
 
+// complicated verson would be if user can track the history of their calculations 
