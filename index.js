@@ -4,6 +4,7 @@ let numbers = document.querySelectorAll(".number")
 let operators = document.querySelectorAll(".operators")
 let clear = document.getElementById('clear')
 let equals = document.getElementById('equals')
+let history = document.getElementById('history')
 
 // clear function to delete the typed number
       // double click to start all over again
@@ -70,18 +71,20 @@ operators.forEach(operator => {
 // handle equals
 equals.addEventListener('click', () => {
   if (wholeFormula.innerText.toString().includes("=")) {
+    
     // if equal button is clicked twice it repeats the previous operation
-    // for example if user enters 2 * 2 and presses equal the user gets 2 * 2 = 4 
-    // if the user clicks equal button again it has to display 4 * 2 = 8, if again 8 * 2 = 16 and so on
-    let equalIndex = wholeFormula.innerText.indexOf("=")
+    let equalIndex = wholeFormula.innerText.indexOf("=") 
     let previousOperation = wholeFormula.innerText.slice(equalIndex-2, equalIndex)
     let result = wholeFormula.innerText.slice(equalIndex+1)
     wholeFormula.innerText = result + previousOperation
     evaluate(currentNumber, wholeFormula, equals)
+    sendToHistory(wholeFormula)
     return
   } 
   wholeFormula.innerText += currentNumber.innerText
   evaluate(currentNumber, wholeFormula, equals)
+  sendToHistory(wholeFormula)
+
 })
 
 
@@ -95,4 +98,15 @@ function evaluate(c, w, e) {
   w.innerText += `${e.innerText}${c.innerText}`
 }
 
+function sendToHistory(w) {
+  // grab the whole formula
+    // format it differently(BUt work on this after you have basic functionality done)
+  // extract the text and send to div with id of "history" by creating new div element
+  let textNode = document.createElement("button")
+  let formulaText = document.createTextNode(w.innerText.toString())
+  textNode.classList.add("history-item")
+  textNode.appendChild(formulaText)
+  history.appendChild(textNode)
+  // give the whole div nice css styling so appended elements overflow beaitfuly
+}
 // complicated verson would be if user can track the history of their calculations 

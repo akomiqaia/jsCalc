@@ -13,13 +13,12 @@
 
  For example, if 5 + * 7 = is entered, the result should be 35 (i.e. 5 * 7); if 5 * - 5 = is entered, the result should be -25 (i.e. 5 x (-5)).
 
-**User Story #6:** Pressing an operator immediately following = starts a new calculation that operates on the result of the previous evaluation.
+**User Story #6:** Pressing an operator immediately following = starts a new calculation that operates on the result of the previous evaluation. If clicked immediately after evaluation it repeats the previous addition, subtraction, division or multiplication. For example,
+> If the user enters **2 * 2** and presses the equal button the user gets **2 * 2 = 4**, then if the user clicks the equal button again it has to display **4 * 2 = 8** if again **8 * 2 = 16** and so on.
 
-**User Story #15:** My calculator has 4 decimal places of precision when it comes to rounding
-___ 
+**User Story #7:** My calculator has 4 decimal places of precision when it comes to rounding
 
 ---
-
 *Note On Calculator Logic:* My calculator utilizes formula logic(opposed to Immediate Execution Logic) and observes order of operation precedence. As long as your math can be verified by another production calculator, please do not consider this a bug.
 
         EXAMPLE: 3 + 5 x 6 - 2 / 4 =
@@ -27,7 +26,7 @@ ___
         Formula/Expression Logic: 32.5
         Immediate Execution Logic: 11.5
 
-[More about the Calculator logic]: https://en.wikipedia.org/wiki/Calculator_input_methods
+More about the Calculator logic: https://en.wikipedia.org/wiki/Calculator_input_methods
 
 
 
