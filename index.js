@@ -5,7 +5,7 @@ let operators = document.querySelectorAll(".operators")
 let clear = document.getElementById('clear')
 let equals = document.getElementById('equals')
 let history = document.getElementById('history')
-
+let historyItems = []
 // clear function to delete the typed number
       // double click to start all over again
 clear.addEventListener('click', () => {
@@ -80,13 +80,21 @@ equals.addEventListener('click', () => {
     evaluate(currentNumber, wholeFormula, equals)
     sendToHistory(wholeFormula)
     return
+
   } 
   wholeFormula.innerText += currentNumber.innerText
   evaluate(currentNumber, wholeFormula, equals)
   sendToHistory(wholeFormula)
-
 })
 
+// ******************************* doesn't work *********************** //////////
+historyItems.map(item => {
+    item.addEventListener('click', () => {
+      wholeFormula.innerText = item.innerText
+    })
+  }
+)
+// ******************************* doesn't work *********************** //////////  
 
 function updateDisplay(c,w,o) {
   w.innerText += `${c.innerText}${o.innerText}`
@@ -107,6 +115,7 @@ function sendToHistory(w) {
   textNode.classList.add("history-item")
   textNode.appendChild(formulaText)
   history.appendChild(textNode)
+  historyItems.push(textNode)
   // give the whole div nice css styling so appended elements overflow beaitfuly
 }
 // complicated verson would be if user can track the history of their calculations 
