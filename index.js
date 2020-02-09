@@ -88,12 +88,7 @@ equals.addEventListener('click', () => {
 })
 
 // ******************************* doesn't work *********************** //////////
-historyItems.map(item => {
-    item.addEventListener('click', () => {
-      wholeFormula.innerText = item.innerText
-    })
-  }
-)
+
 // ******************************* doesn't work *********************** //////////  
 
 function updateDisplay(c,w,o) {
