@@ -5,7 +5,7 @@ let operators = document.querySelectorAll(".operators")
 let clear = document.getElementById('clear')
 let equals = document.getElementById('equals')
 let history = document.getElementById('history')
-let historyItems = []
+
 // clear function to delete the typed number
       // double click to start all over again
 clear.addEventListener('click', () => {
@@ -71,7 +71,6 @@ operators.forEach(operator => {
 // handle equals
 equals.addEventListener('click', () => {
   if (wholeFormula.innerText.toString().includes("=")) {
-    
     // if equal button is clicked twice it repeats the previous operation
     let equalIndex = wholeFormula.innerText.indexOf("=") 
     let previousOperation = wholeFormula.innerText.slice(equalIndex-2, equalIndex)
@@ -80,21 +79,12 @@ equals.addEventListener('click', () => {
     evaluate(currentNumber, wholeFormula, equals)
     sendToHistory(wholeFormula)
     return
-
   } 
   wholeFormula.innerText += currentNumber.innerText
   evaluate(currentNumber, wholeFormula, equals)
   sendToHistory(wholeFormula)
 })
 
-// ******************************* doesn't work *********************** //////////
-historyItems.map(item => {
-    item.addEventListener('click', () => {
-      wholeFormula.innerText = item.innerText
-    })
-  }
-)
-// ******************************* doesn't work *********************** //////////  
 
 function updateDisplay(c,w,o) {
   w.innerText += `${c.innerText}${o.innerText}`
@@ -108,14 +98,20 @@ function evaluate(c, w, e) {
 
 function sendToHistory(w) {
   // grab the whole formula
-    // format it differently(BUt work on this after you have basic functionality done)
   // extract the text and send to div with id of "history" by creating new div element
-  let textNode = document.createElement("button")
+  let textNode = document.createElement("h2")
   let formulaText = document.createTextNode(w.innerText.toString())
   textNode.classList.add("history-item")
   textNode.appendChild(formulaText)
   history.appendChild(textNode)
-  historyItems.push(textNode)
-  // give the whole div nice css styling so appended elements overflow beaitfuly
+  textNode.addEventListener('click', () => {
+    // clickFunction(textNode.innerText, w)
+    w.innerText = textNode.innerText
+    currentNumber.innerText = ""
+  })
 }
-// complicated verson would be if user can track the history of their calculations 
+
+// function clickFunction(item, wF) {
+//   wF.innerText = item
+//   currentNumber.innerText = ""
+// }

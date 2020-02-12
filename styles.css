@@ -79,24 +79,36 @@ body {
 
 .current-number{
   min-height: 60px;
-
   color: black;
   font-size: 2.5rem;
 }
 
-#history{
-  display: flex;
-  width: 30vw;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
 
+#history {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  height: 80vh;
+}
 .history-item {
-  margin-bottom: 20px;
-  margin-right: 10px;
   cursor: pointer;
   font-size: 1.5rem;
-  border: solid 3px white;
-  outline: none;
-  background-color: rgba(255,255,255,0.75);
+}
+.history-item:after{
+  content: "";
+  position: relative;
+  display: flex;
+  bottom: -10px;
+  /* left: 0px; */
+  height: 0.5em;
+  border-top: 3px solid black;
+}
+.history-item:hover {
+  background-color: rgba(255,255,255);
+}
+
+@media screen and (max-width: 749px) {
+  .container {
+    flex-direction: column;
+  }
 }
