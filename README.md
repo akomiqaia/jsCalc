@@ -14,7 +14,7 @@
  For example, if 5 + * 7 = is entered, the result should be 35 (i.e. 5 * 7); if 5 * - 5 = is entered, the result should be -25 (i.e. 5 x (-5)).
 
 **User Story #6:** Pressing an operator immediately following = starts a new calculation that operates on the result of the previous evaluation. If clicked immediately after evaluation it repeats the previous addition, subtraction, division or multiplication. For example,
-> If the user enters **2 * 2** and presses the equal button the user gets **2 * 2 = 4**, then if the user clicks the equal button again it has to display **4 * 2 = 8** if again **8 * 2 = 16** and so on.
+> If the user enters **2 * 2** and presses the equal button the user gets **2 * 2 = 4**, then if the user clicks the equal button again the calculator will display **4 * 2 = 8** if again **8 * 2 = 16** and so on.
 
 **User Story #7:** My calculator has 4 decimal places of precision when it comes to rounding
 

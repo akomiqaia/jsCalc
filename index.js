@@ -7,7 +7,7 @@ let equals = document.getElementById('equals')
 let history = document.getElementById('history')
 
 // clear function to delete the typed number
-      // double click to start all over again
+      // double click to clear everything
 clear.addEventListener('click', () => {
   currentNumber.innerText = ""
 } )
@@ -98,20 +98,15 @@ function evaluate(c, w, e) {
 
 function sendToHistory(w) {
   // grab the whole formula
-  // extract the text and send to div with id of "history" by creating new div element
+  // extract the text and send to div with id of "history" by creating new h2 element
   let textNode = document.createElement("h2")
   let formulaText = document.createTextNode(w.innerText.toString())
   textNode.classList.add("history-item")
   textNode.appendChild(formulaText)
   history.appendChild(textNode)
+  // add event listener to each history log so in case of clicking on the log user can return back
   textNode.addEventListener('click', () => {
-    // clickFunction(textNode.innerText, w)
     w.innerText = textNode.innerText
     currentNumber.innerText = ""
   })
 }
-
-// function clickFunction(item, wF) {
-//   wF.innerText = item
-//   currentNumber.innerText = ""
-// }
