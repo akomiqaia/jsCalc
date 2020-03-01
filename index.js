@@ -47,7 +47,6 @@ let endsWithMinus = /[\/\*\+\-]-$/
 operators.forEach(operator => {
   operator.addEventListener('click', () => {
     // If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign).
-    console.log(currentNumber.innerText)
     if (currentNumber.innerText == "") {
 
       if(endsWithMinus.test(wholeFormula.innerText)) {
