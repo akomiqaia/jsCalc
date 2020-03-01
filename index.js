@@ -47,18 +47,22 @@ let endsWithMinus = /[\/\*\+\-]-$/
 operators.forEach(operator => {
   operator.addEventListener('click', () => {
     // If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign).
-    if(endsWithMinus.test(wholeFormula.innerText)) {
-      wholeFormula.innerText = wholeFormula.innerText.slice(0, -2) + operator.innerText
-      return
-    }
-    if(endsWithOperator.test(wholeFormula.innerText)) {
-      if (operator.innerText == '-') {
-        wholeFormula.innerText += '-'
-      }
-      wholeFormula.innerText = wholeFormula.innerText.slice(0, -1) + operator.innerText
-      return
-    }
+    console.log(currentNumber.innerText)
+    if (currentNumber.innerText == "") {
 
+      if(endsWithMinus.test(wholeFormula.innerText)) {
+        wholeFormula.innerText = wholeFormula.innerText.slice(0, -2) + operator.innerText
+        return
+      }
+      if(endsWithOperator.test(wholeFormula.innerText)) {
+        if (operator.innerText == '-') {
+          wholeFormula.innerText += '-'
+        }
+        wholeFormula.innerText = wholeFormula.innerText.slice(0, -1) + operator.innerText
+        return
+      }
+    }
+    
     if (wholeFormula.innerText.toString().includes("=")) {
       wholeFormula.innerText = `${currentNumber.innerText}${operator.innerText}`
       currentNumber.innerText = ""
@@ -90,6 +94,7 @@ function updateDisplay(c,w,o) {
   w.innerText += `${c.innerText}${o.innerText}`
   c.innerText = ""
 }
+
 function evaluate(c, w, e) {
   // calculate the value and if it's long float number just torund it to 4 decimal number
   c.innerText = +eval(w.innerText).toFixed(4)
